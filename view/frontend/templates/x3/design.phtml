@@ -1,0 +1,126 @@
+<?php 
+if (!$this->pdcHelper->isModuleEnable()) {
+    echo "<h3>".__('PDC X3 module is disabled. Please enable PDP to use it\'s features!')."</h3>";
+    return false;
+}
+$jsUrl = $this->getPdcJsUrl();
+$jsonString = $this->getCurrentDesignJson();
+$sidesConfig = $this->getSidesConfig();
+$asset_repository = $this->assetRepository;
+?>
+<html>
+	<head>
+		<title><?php echo __("PDC X3") ?></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+		<?php if($this->isAdminUser()) : ?>
+        <?php echo $this->getLayout()->createBlock('Magebay\Pdc\Block\X3')->setTemplate('Magebay_Pdc::x3/design/css-ref.phtml')->toHtml(); ?>
+        <link href="<?php echo $jsUrl; ?>/dropzone/dropzone.css" rel="stylesheet"/>
+        <?php endif; ?>
+	</head>
+	<body>
+		<div id="pdcwrapper" class="pdc-wrapper">
+		<?php /* Fix Download */ ?>
+		<?php  
+			$isNginx = 0;
+			$typeServer = $_SERVER["SERVER_SOFTWARE"];
+			if($typeServer != '')
+			{
+				$arTypeSever = explode('/',$typeServer);
+				if(isset($arTypeSever[0]) && strtolower($arTypeSever[0]) == 'nginx')
+				{
+					$isNginx = 1;
+				}
+			}
+		?>
+		<input type="hidden" value="<?php echo $this->getUrl(); ?>pdc/index/DownloadAfterCreate" id="link-download-after" name="link_download_after" />
+		<input type="hidden" value="<?php echo $isNginx; ?>" id="server-nginx" name="server_nginx" />
+		<?php /* end Fix Download */ ?>
+            <?php echo $this->getLayout()->createBlock('Magebay\Pdc\Block\X3')->setTemplate('Magebay_Pdc::x3/design/load_fonts.phtml')->toHtml();// Load on design button .phtml ?>
+            <div class="pdc-config" style="display: none;">
+                <div class='design-btn' style="display: none">
+                    <?php echo $this->getLayout()->createBlock('Magebay\Pdc\Block\Designbutton')->setTemplate('Magebay_Pdc::product/design_button.phtml')->toHtml() ?>
+                </div>
+                <input name="pdp_design_string" type="hidden" value="<?php echo htmlentities($jsonString) ?>"/>
+                <?php if($sidesConfig) : ?>
+                <input id="sides_config" type="hidden" value="<?php echo htmlentities($sidesConfig) ?>"/>
+                <?php endif; ?>
+                <input type="hidden" value="<?php echo (isset($_REQUEST['fb'])) ? $_REQUEST['fb'] : "";  ?>" id="fb_get_id" />
+                <input type="hidden" id="pdp_media_url" name="pdp_media_url" value="<?php echo $this->pdcHelper->getMediaUrl() . 'pdp/images/'; ?>" />
+            
+            </div>
+            <!--Loading Progess Bar-->
+            <div class="pdploading" style="display: none;"></div>
+			<!-- Topbar  -->
+			<?php echo $this->getLayout()->createBlock('Magebay\Pdc\Block\X3')->setTemplate('Magebay_Pdc::x3/design/topbar.phtml')->toHtml(); ?>
+			<!-- End Topbar  -->
+			<div class="pdc-container">
+				<div class="pdc-center">
+					<div class="pdc_design_panel">
+						<div class="">
+							<div class="pdc-wrap-main">
+								<!-- Area Left  -->
+								<div class="pdc-area-left collapse-left">						
+									<?php echo $this->getLayout()->createBlock('Magebay\Pdc\Block\X3')->setTemplate('Magebay_Pdc::x3/design/left-area.phtml')->toHtml(); ?>
+								</div>
+								<!-- End Area Left  -->
+								<!-- Area Main  -->
+								<div class="pdc-area-main expand-main">
+                                    <?php echo $this->getLayout()->createBlock('Magebay\Pdc\Block\X3')->setTemplate('Magebay_Pdc::x3/design/main-area.phtml')->toHtml(); ?>
+								</div>
+								<!-- End Area Main  -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="popup">
+				<!--Object Controls-->
+                <?php echo $this->getLayout()->createBlock('Magebay\Pdc\Block\X3')->setTemplate('Magebay_Pdc::x3/design/object-controls.phtml')->toHtml(); ?>
+				<!--Modals-->
+                <?php echo $this->getLayout()->createBlock('Magebay\Pdc\Block\X3')->setTemplate('Magebay_Pdc::x3/design/modals.phtml')->toHtml(); ?>
+			</div>
+		</div>
+        <div class='pdp_actions_backend'>
+            <?php if ($this->isAdminUser()) : ?>
+            <input type="hidden" id="is_backend" value="yes" />
+            <script src="<?php echo $jsUrl;?>/jquery/jquery-1.10.2.min.js"></script>
+            <script src="<?php echo $jsUrl;?>/fabricjs/fabric.js"></script>
+            <script type="text/javascript" src="<?php echo $jsUrl ?>/bootstrap/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="<?php echo $jsUrl ?>/fancybox/jquery.fancybox.js"></script>
+            <script type="text/javascript" src="<?php echo $jsUrl ?>/x3/js/jquery.imagelistexpander.js"></script> 
+            <script type="text/javascript" src="<?php echo $jsUrl ?>/scrollbar/jquery.scrollbar.js"></script>  
+            <!--<script type="text/javascript" src="<?php echo $jsUrl ?>iscroll/iscroll-zoom.js"></script>-->
+            <script src="<?php echo $jsUrl; ?>/dropzone/dropzone.min.js"></script>
+            <link href="<?php echo $jsUrl;?>/jquery/colorpicker/css/colorpicker.css" rel="stylesheet"/>
+	        <script src="<?php echo $jsUrl;?>/jquery/colorpicker/colorpicker.js"></script>
+            <link href="<?php echo $jsUrl;?>/pace/dataurl.css" rel="stylesheet"/>
+            <script src="<?php echo $jsUrl;?>/pace/pace.min.js"></script>
+			<!-- Instagram JS/CSS -->
+			<?php if($this->pdcHelper->getStoreConfigData('pdp/customer_action/is_instagram')){ ?>
+			<script type="text/javascript" src="<?php echo $jsUrl;?>/instagram/instagram_connect.js"></script>
+			<link href="<?php echo $jsUrl;?>/instagram/css/ins.css" rel="stylesheet" type="text/css" />
+			<?php } ?>
+            <!-- Facebook JS/CSS -->
+			<?php if($this->pdcHelper->getStoreConfigData('pdp/customer_action/is_facebook')){ ?>
+			<script type="text/javascript" src="<?php echo $jsUrl;?>/facebook/facebook_connect.js"></script>
+			<?php } ?>
+            <?php endif; ?>
+        </div>
+        <?php 
+        $jsFiles = array(
+            'pdc/x3/js/custom.js',
+            'pdc/curvedtext/js/curvedtext.js',
+            'pdc/pdc/js/productsdesignercanvas-1.0.js',
+            'pdc/x3/js/x3.js',
+            'pdc/pdc/js/pdc.layer.js',
+            'pdc/x3/js/image.js',
+            'pdc/x3/js/object_control.js',
+            'pdc/curvedtext/js/pdc.text.action.js',
+        );
+        ?>
+        <?php foreach($jsFiles as $jsFile) : ?>
+            <?php $asset  = $asset_repository->createAsset('Magebay_Pdc::' . $jsFile); ?>
+            <script src="<?php echo $asset->getUrl() ?>"></script>
+        <?php endforeach; ?>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+<?php
+$asset_repository = $this->assetRepository;
+$angularjs = array(
+    'angular/lib/angular.js',
+    'angular/lib/angular-route.min.js',
+    //'angular/lib/angular-animate.js',
+    'angular/lib/bootstrap-colorpicker-module.min.js',
+    'angular/x3/app.js',
+    'angular/x3/routes.js',
+    'angular/x3/services.js',
+    'angular/x3/controllers.js',
+    'angular/x3/directives.js',
+    'pdc/fabricjs/fabric.js'
+);
+?>
+<?php foreach($angularjs as $jsFile) : ?>
+    <?php $asset  = $asset_repository->createAsset('Magebay_Pdc::' . $jsFile); ?>
+    <script src="<?php echo $asset->getUrl() ?>"></script>
+<?php endforeach; ?>
+<input type="hidden" id="mst_base_url" value="<?php echo $this->pdcHelper->getBaseUrl() ?>" />
+<input type="hidden" id="mst_media_url" value="<?php echo $this->pdcHelper->getMediaUrl() ?>" />
+<input type="hidden" id="current_product_id" value="<?php echo $this->getRequest()->getParam('productid') ?>" />

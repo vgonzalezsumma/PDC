@@ -1,0 +1,39 @@
+<?php
+$productId = $this->getProductId();
+$baseUrl = $this->pdcHelper->getBaseUrl();
+$pdpDesignInfo = $this->getPdpDesignInfo(); 
+//If redesign request, pass the redesign id to iframe
+$redesign = "";
+$params = $this->getParams();
+if(isset($params["redesign"]) && $params["redesign"]) {
+    $redesign = "redesign/" . $params["redesign"] . "/";
+} 
+//For share request
+$shareParam = "";
+if(isset($params["share"]) && $params["share"]) {
+    $shareParam = "share/" . $params["share"] . "/";
+}
+$iframeUrl = $baseUrl . "pdc/view/getiframe/product-id/" . $productId . "/json/" . $pdpDesignInfo['extra_options'] . "/" . $redesign . $shareParam;
+?>
+<style type="text/css">
+#pdc_iframe {
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0; 
+	border: 0px solid transparent;
+	margin: auto; 
+	position: absolute; 
+	top: -100000px;
+	z-index: 100000;
+}
+</style>
+<span style="display : none">
+<button type="button" id="pdc-reload-price-option">Reload Price </button>
+<input type="text" name="pdc_extract_price" id="pdc-extract-price" value="" />
+<input type="text" name="product_custom_price" id="product-custom-price" value="" />
+</span>
+<iframe id="pdc_iframe" src="<?php echo $iframeUrl ?>"></iframe>
+<script type="text/javascript">		
+	var pdcIframe = document.getElementById("pdc_iframe");
+	document.getElementById("design_product_<?php echo $this->getProductId() ?>").addEventListener("click", function(){
+		pdcIframe.contentDocument.getElementById('get_design_content').click();
+	});
+</script>
