@@ -275,7 +275,6 @@
         getActiveSide: function() {
             if($(".side-item.active").length) {
                 var activeSideId = $(".side-item.active").attr("id").replace("side-", "");
-                //console.info(activeSideId, "Get Active Side");
                 return _sidesConfig[activeSideId];
             }
         },
@@ -755,7 +754,7 @@
         getSidesConfig: function() {
             return _sidesConfig;
         },
-        prepareCanvas: function() {
+        prepareCanvas: function() {     
             if(_sidesConfig) {
                 var sideListHtml,
                     sortedSideListHtml = '',
@@ -773,14 +772,7 @@
                         self.allCanvas[side.id].setHeight(side.canvasheight);
                         self.allCanvas[side.id].allowTouchScrolling = true;
                     }
-                    sideListHtml = '<li>';
-                    sideListHtml += '<a id="side-'+ side.id +'" pdc-action="SWITCH_SIDE" class="side-item">';
-                    if(side.background_type == "image" && side.filename) {
-                        sideListHtml += '<img width="70px" src="'+ config.media_url + (side.thumbnail || side.filename) +'"/>';
-                    }        
-                    sideListHtml += '<span>'+ side.label +'</span>';
-                    sideListHtml += '</a>';
-                    sideListHtml += '</li>';
+                    sideListHtml = '<li><a id="side-'+ side.id +'" pdc-action="SWITCH_SIDE" class="side-item">Reverse</a></li>';
                     //console.info(sideId, side);
                     unsortSideListArr.push({
                         id: side.id,
@@ -796,6 +788,7 @@
                 $.each(sortedSideListArr, function() {
                     sortedSideListHtml += this.html;                                              
                 });
+                
                 $('[pdc-data="side-list"]').html(sortedSideListHtml);
                 //Active first side
                 $('[pdc-data="side-list"] li:first .side-item').addClass("active");
@@ -1614,16 +1607,20 @@
             if($(this).hasClass("active")) return false;
             $('[pdc-action="SWITCH_SIDE"]').removeClass("active");
             $(this).addClass("active");
+            
             //Clear all selection of all canvas
             $.each(self.allCanvas, function(i, _canvas) {
                 _canvas.deactivateAll();
                 _canvas.renderAll();
             });
+            
             self.hideObjectControl();
             self.initCanvas();
+            
             self.pdcZoom.updateWrappSize(self.getCurrentCanvas()); //Update zoom percent
+            
             //Reload Layer
-            PDC_layer.load_layer();
+            //PDC_layer.load_layer();
         });
         $('[pdc-data="add-text"]').click(function() {
             self.addText($(this).text(), parseFloat($(this).attr("fontsize")));

@@ -11,44 +11,32 @@ $enableInstagramImage = $this->getFieldSetting('pdp/customer_action/is_instagram
 <div class="panel-group panel-mst" id="accordion_upload" role="tablist" aria-multiselectable="true">
 	<!-- Upload -->
     <?php if(!isset($productConfigs['enable_upload_plugin']) || isset($productConfigs['enable_upload_plugin']) && $productConfigs['enable_upload_plugin'] == 1): ?>
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="headingOne">
-				<h4 class="panel-title">
-					<a role="button" data-toggle="collapse" data-parent="#accordion_upload" href="#u-upload" aria-expanded="true" aria-controls="u-upload">
-						<i class="fa-cloud-upload fa"></i>
-						<span><?php echo __("Upload") ?></span>
-					</a>
-				</h4>
-			</div>
-			<div id="u-upload" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-				<div class="panel-body">
-					<input type="hidden" id="upload_accept_files" value="<?php echo $this->uploadHelper->getFileAccept() ?>" />
-					<input type="hidden" id="pdc_upload_config" value="<?php echo htmlentities($this->uploadHelper->getConfig('JSON')) ?>"/>
-					<div class="pdc-show-content" pdc-data="image-list" pdc-image-type="upload_image">													
-						<p><?php echo __("Have your own image, logo or artwork?") ?></p>
-                        <?php $hasWarmingImage = false ?>
-                        <ul class="items-list">
-                        </ul>
-						<div class="alert alert-warning alert-dismissible fade in" pdc-data="image-warming" role="alert" style="<?php echo ($hasWarmingImage) ? "display:block;" : "display: none;"; ?>"> 
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> 
-							<strong><?php echo __("Warning") ?>!</strong>
-							<span><?php echo __($this->pdcHelper->getStoreConfigData("pdp/custom_upload/upload_min_dpi_message")) ?></span> 
-						</div>
-						<div class="pdc-show-content-detail">
-							<div class="pdc-upload-area dropzone"></div>
-							<!--<button type="button" pdc-action="upload-image" class="pdc-btn upload-btn"><span><?php echo __("Upload") ?></span></button>-->
-							<div class="upload-type">
-								<p><?php echo __("Photo formats accept") ?>:</p>
-								<?php $supportedFormats = $this->uploadHelper->getSupportedImages() ?>
-								<ul class="list-type-format">
-									<?php foreach($supportedFormats as $format) :  ?>
-									<li><?php echo strtoupper($format) ?></li>
-									<?php endforeach; ?>
-								</ul>														              
-							</div>
-							<p><em><?php echo __("On uploading one or several images, you agree to the terms on using these images. Making use of third party images or infringing somebody else's rights is unlawful."); ?></em></p>
-						</div>				
+		<div id="u-upload">
+			<input type="hidden" id="upload_accept_files" value="<?php echo $this->uploadHelper->getFileAccept() ?>" />
+			<input type="hidden" id="pdc_upload_config" value="<?php echo htmlentities($this->uploadHelper->getConfig('JSON')) ?>"/>
+			<div class="pdc-show-content" pdc-data="image-list" pdc-image-type="upload_image">													
+				<p><?php echo __("Have your own image, logo or artwork?") ?></p>
+				<?php $hasWarmingImage = false ?>
+				<ul class="items-list">
+				</ul>
+				<div class="alert alert-warning alert-dismissible fade in" pdc-data="image-warming" role="alert" style="<?php echo ($hasWarmingImage) ? "display:block;" : "display: none;"; ?>"> 
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> 
+					<strong><?php echo __("Warning") ?>!</strong>
+					<span><?php echo __($this->pdcHelper->getStoreConfigData("pdp/custom_upload/upload_min_dpi_message")) ?></span> 
+				</div>
+				<div class="pdc-show-content-detail">
+					<div class="pdc-upload-area dropzone"></div>
+					<!--<button type="button" pdc-action="upload-image" class="pdc-btn upload-btn"><span><?php echo __("Upload") ?></span></button>-->
+					<div class="upload-type">
+						<p><?php echo __("Photo formats accepted") ?>:</p>
+						<?php $supportedFormats = $this->uploadHelper->getSupportedImages() ?>
+						<ul class="list-type-format">
+							<?php foreach($supportedFormats as $format) :  ?>
+							<li><?php echo strtoupper($format) ?></li>
+							<?php endforeach; ?>
+						</ul>														              
 					</div>
+					<p><?php echo __("On uploading one or several images, you agree to the terms on using these images. Making use of third party images or infringing somebody else's rights is unlawful."); ?></p>
 				</div>
 			</div>
 		</div>

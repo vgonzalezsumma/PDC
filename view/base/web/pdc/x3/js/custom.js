@@ -1,17 +1,27 @@
 var mst = jQuery.noConflict();
 mst(document).ready(function($){
     /* Hide the app content expanded as default of first load on small screen size device */
-    if($(top.window).width()< 750){
+    if($(top.window).width()< 750) {
         $(".pdc-area-left .tab-content, .pdc-area-main").addClass('expand-main');
         $(".pdc-area-left").addClass('collapse-left');
     }
 
     /* Button collapse the app content */
-    $("#toggle-app-button").click(function(){
-        $(".pdc-area-left .tab-content, .pdc-area-main").addClass('expand-main');
-        $(".pdc-area-left").addClass('collapse-left');
-		$(".pdc-area-left .pdc-tabs ul.tabs-left li").removeClass("active");
-    });
+    
+    $('[data-toggle="accordion"]').click(function(evt) {
+            evt.preventDefault();
+            var id        = $(this).attr('href'),
+                $siblings = $('[data-group='+$(this).data('group-target')+']:not([id="'+id.replace('#','')+'"])');
+            $siblings.removeClass('active');
+            $(id).toggleClass('active');
+            $(this).toggleClass('active');
+            $(this).siblings('[data-toggle="accordion"]').removeClass('active');
+        if($(top.window).width() > 768) {
+            $siblings.slideUp();
+            $(id).slideToggle();
+        }
+    })
+
 	if($(top.window).width()< 750){
 		$(".pdc-area-main").click(function(){ 
 			$(".pdc-area-left .tab-content, .pdc-area-main").addClass('expand-main');
