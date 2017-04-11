@@ -772,7 +772,7 @@
                         self.allCanvas[side.id].setHeight(side.canvasheight);
                         self.allCanvas[side.id].allowTouchScrolling = true;
                     }
-                    sideListHtml = '<li><a id="side-'+ side.id +'" pdc-action="SWITCH_SIDE" class="side-item">Reverse</a></li>';
+                    sideListHtml = '<a id="side-'+ side.id +'" pdc-action="SWITCH_SIDE" class="side-item controls-item">Reverse</a>';
                     //console.info(sideId, side);
                     unsortSideListArr.push({
                         id: side.id,
@@ -789,9 +789,9 @@
                     sortedSideListHtml += this.html;                                              
                 });
                 
-                $('[pdc-data="side-list"]').html(sortedSideListHtml);
+                $('[pdc-data="side-list"]').append(sortedSideListHtml);
                 //Active first side
-                $('[pdc-data="side-list"] li:first .side-item').addClass("active");
+                $('[pdc-data="side-list"] .side-item:first').addClass("active");
                 if(counter == 1) {
                     $("#pdc_sides").hide();
                 }
@@ -1448,7 +1448,7 @@
                     originalWidth = _canvas.getWidth() * (1 / (_canvas.scale || 1));
                     //originalHeight = _canvas.getHeight() * (1 / this.canvasScale);
                 var percent = (newWidth * 100) / originalWidth;
-                $(".pdc-zoom .input-zoom").val(parseInt(percent) + "%");
+                $(".pdc-zoom .input-zoom").html(parseInt(percent) + "%");
             },
             validateBeforeZoomIn: function(_canvas) {
                 if(parseFloat(_canvas.getWidth()) > this.maxWidth) {

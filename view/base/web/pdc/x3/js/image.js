@@ -335,11 +335,11 @@ x3Image(function($) {
             });
 		},
         initScrollbar: function(selector) {
-            $(".items-list").scrollbar({
+            /*$(".items-list").scrollbar({
                 //"showArrows": true,
                 //"scrollx": "simple",
                 "scrolly": "simple"
-            });  
+            });*/
         },
         showOrHideLoadMoreBtn : function(_returnItems, imageTypeContainer) {
             if(_returnItems >= PDCImage.limit) {

@@ -24,20 +24,31 @@
             </div>																													
         </div>
     </div>
-    <div class="pdc-main-bottom">
+    <div id="pdc_controls">
+        <div class="pdc-sides pdc-controls-group" pdc-data="side-list">
+        </div>
         <?php $productConfigs = $this->getProductConfig(); ?>
         <?php if(!isset($productConfigs['enable_zoom_btn']) || isset($productConfigs['enable_zoom_btn']) && $productConfigs['enable_zoom_btn'] == 1): ?>
-		<div class="pdc-zoom hidden"><!--Desktop Zoom-->
-			<button type="button" class="btn-zoom btn-zoom-in" data-toggle="tooltip" data-placement="left" title="<?php echo __("Zoom In") ?>"><span><i class="fa fa-search-plus"></i></span></button>
-			<input type="text" disabled="disabled" class="input-zoom" value="100%"/>
-			<button type="button" class="btn-zoom btn-zoom-out" data-toggle="tooltip" data-placement="left" title="<?php echo __("Zoom Out") ?>"><span><i class="fa fa-search-minus"></i></span></button>
-			<button type="button" class="btn-zoom btn-zoom-reset" data-toggle="tooltip" data-placement="left" title="<?php echo __("Reset Zoom") ?>"><span><i class="fa fa-compress"></i></span></button>
-		</div>
+        <div class="pdc-zoom pdc-controls-group">
+            <a class="btn-zoom zoom-out-item btn-zoom-out controls-item" data-toggle="tooltip" data-placement="left"></a>
+            <div class="input-zoom">100%</div>
+            <a class="btn-zoom zoom-in-item btn-zoom-in controls-item" data-toggle="tooltip" data-placement="left"></a>
+        </div>
+        <div class="pdc-navigation pdc-controls-group">
+            <a href="#" class="controls-item undo-item"><?php echo __('Undo') ?></a>
+            <a href="#" class="controls-item redo-item"><?php echo __('Redo') ?></a>
+            <?php if(!isset($productConfigs['enable_reset_btn']) || isset($productConfigs['enable_reset_btn']) && $productConfigs['enable_reset_btn'] == 1): ?>
+            <a href="#pdc-reset-cont" class="controls-item clear-item fancybox"><?php echo __('Clear') ?></a>
+            <?php endif; ?>
+        </div>
+        <div class="pdc-social pdc-controls-group">
+            <?php if(!isset($productConfigs['enable_share_btn']) || isset($productConfigs['enable_share_btn']) && $productConfigs['enable_share_btn'] == 1): ?>
+            <a href="#" class="controls-item share-item" pdc-data="SHARE_DESIGN"><?php echo __('Share') ?></a>
+            <?php endif; ?>
+            <?php if(!isset($productConfigs['enable_download_btn']) || isset($productConfigs['enable_download_btn']) && $productConfigs['enable_download_btn'] == 1): ?>
+            <a href="#" class="controls-item download-item" pdc-data="DOWNLOAD-PNG"><?php echo __('Download') ?></a>
+            <?php endif; ?>
+        </div>
         <?php endif; ?>
-        <div id="pdc_sides" class="sides-tab">
-            <ul class="tab-sides" pdc-data="side-list">
-                
-            </ul>
-        </div>	
     </div>
 </div>
