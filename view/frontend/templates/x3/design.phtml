@@ -48,11 +48,24 @@ $asset_repository = $this->assetRepository;
                 <input type="hidden" id="pdp_media_url" name="pdp_media_url" value="<?php echo $this->pdcHelper->getMediaUrl() . 'pdp/images/'; ?>" />
             
             </div>
-            <!--Loading Progess Bar-->
-            <div class="pdploading" style="display: none;"></div>
+            <!--Loading Progess -->
+            <div class="pdploading" style="display: none;">
+				<div class="la-ball-spin">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+				<span><?php echo __("Saving") ?></span>
+			</div>
 			<!-- Topbar  -->
 			<?php //echo $this->getLayout()->createBlock('Magebay\Pdc\Block\X3')->setTemplate('Magebay_Pdc::x3/design/topbar.phtml')->toHtml(); ?>
 			<!-- End Topbar  -->
+            <a id="submitDesign_bt" pdc-data="pdc-btn" pdc-action="SAVE_SAMPLE_DESIGN" href="#" title="<?php echo __("Submit") ?>"><?php echo __("Submit") ?></a>
 			<div class="pdc-container">
 				<div class="pdc-center">
 					<div class="pdc_design_panel">

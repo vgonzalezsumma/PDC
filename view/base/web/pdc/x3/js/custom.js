@@ -7,7 +7,7 @@ mst(document).ready(function($){
     }
 
     /* Button collapse the app content */
-    
+
     $('[data-toggle="accordion"]').click(function(evt) {
             evt.preventDefault();
             var id        = $(this).attr('href'),

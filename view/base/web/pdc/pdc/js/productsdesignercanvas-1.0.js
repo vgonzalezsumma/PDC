@@ -26,6 +26,9 @@
     // prototype holds methods (to save memory space)
     // All core functions place here
 	PDC.prototype = {
+	    side: '',
+	    sidesQty: 0,
+        sideId: 0,
 		version: '1.0.1',
         //All side info place here
         sides: {},
@@ -772,8 +775,7 @@
                         self.allCanvas[side.id].setHeight(side.canvasheight);
                         self.allCanvas[side.id].allowTouchScrolling = true;
                     }
-                    sideListHtml = '<a id="side-'+ side.id +'" pdc-action="SWITCH_SIDE" class="side-item controls-item">Reverse</a>';
-                    //console.info(sideId, side);
+                    sideListHtml = '<a id="side-'+ side.id +'" pdc-action="SWITCH_SIDE" class="side-item controls-item"><img src="" />Reverse</a>';
                     unsortSideListArr.push({
                         id: side.id,
                         pos: parseInt(side.position || 0),
@@ -1629,6 +1631,7 @@
         //**************************** End X3 Event ******************************
         // Add event listener
         $('[pdc-action="SAVE_SAMPLE_DESIGN"]').click(function() {
+            alert(self.checkJSONReady.status);
             if(self.checkJSONReady.status == 1) {
                 var maxWidth = 200,
                     _canvas;

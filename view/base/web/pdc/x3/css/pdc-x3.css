@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i);
+@import url(la-ball-spin.css);
 body {
     background: transparent;
     display: block;
@@ -228,8 +229,7 @@ h3.item-title {
 .topbar-buttons li .tool-btn span {
     vertical-align: middle;
 }
-.topbar-buttons li .tool-btn:hover,
-.topbar-buttons li .continue-shopping {
+.topbar-buttons li .tool-btn:hover, .topbar-buttons li .continue-shopping {
     background: #44B4AA none repeat scroll 0 0;
     border-radius: 0;
     color: #FFF;
@@ -501,8 +501,8 @@ h3.item-title {
 }
 
 #upload .pdc-show-content > p:first-child {
-  font-weight: 600;
-  margin: 25px 0 30px;
+    font-weight: 600;
+    margin: 25px 0 30px;
 }
 
 .pdc-area-left ul.nav-tabs > li {
@@ -529,7 +529,7 @@ h3.item-title {
     font-weight: bold;
 }
 .pdc-area-left ul.nav-tabs > li.active a {
-  cursor: default;
+    cursor: default;
 }
 .pdc-area-left ul.nav-tabs > li a img {
     display: inline-block;
@@ -582,9 +582,7 @@ h3.item-title {
     background: #E91E63 none repeat scroll 0 0 !important;
 }
 
-ul.nav-tabs > li a:hover,
-ul.nav-tabs > li.active a,
-ul.nav-tabs > li.active a:hover {
+ul.nav-tabs > li a:hover, ul.nav-tabs > li.active a, ul.nav-tabs > li.active a:hover {
     border: none;
     border-bottom: 3px solid #8647C6;
     background: none;
@@ -1310,6 +1308,9 @@ ul.nav-tabs > li.active a:hover {
     background: url(../images/icon-turn.png) 50% 13px no-repeat;
     background-size: 36px auto;
 }
+#pdc_controls .pdc-sides .side-item img {
+    display: none !important;
+}
 #pdc_controls .pdc-zoom .zoom-out-item {
     background: url(../images/icon-zoomout.png) 50% 50% no-repeat;
     background-size: 18px auto;
@@ -1647,45 +1648,19 @@ ul.nav-tabs > li.active a:hover {
 /* Zoom Tool*/
 /* Loadding Bar*/
 .pdploading {
-    background: #FFF url('../images/load.gif') no-repeat scroll center center;
-    height: 120px;
-    left: 0;
-    margin: 0 auto;
     position: absolute;
-    right: 0;
-    text-align: center;
-    top: 40%;
-    width: 305px;
-    z-index: 99999;
-    box-shadow: 3px 0 3px rgba(0,0,0,.5);
-    border: 10px inset #069;
+    color: #7918BE;
+    font-size: 11px;
+    font-weight: 600;
+    top: 20px;
+    left: 30px;
 }
-.pdploading::before {
-    color: #000;
-    content: 'Saving data, please wait...';
-    font-family: 'Arial',sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    left: 0;
-    position: absolute;
-    text-align: center;
-    top: 8px;
-    width: 100%;
-}
-.pdploading .saving {
-    width: 295px;
-    margin: 0 auto;
-}
-.pdploading li {
-    float: left;
-}
-.pdploading li a {
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px 0 0;
-    border-radius: 0;
-    text-align: right;
-    text-transform: normal;
+.pdploading span {
+    display: inline-block;
+    padding-left: 10px;
+    height: 20px;
+    vertical-align: middle;
+    line-height: 10px;
 }
 /**Product Color List**/
 ul.product-colors {
