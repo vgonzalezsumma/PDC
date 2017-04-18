@@ -16,6 +16,13 @@
             </div>																													
         </div>
     </div>
+    
+    <?php if(!$this->isAdminUser()) : ?>
+    <a id="save-btn" pdc-data="SAVE_CUSTOMER_DESIGN"><?php echo __("Save") ?></a>
+    <?php else : ?>
+    <a id="save-btn" pdc-data="pdc-btn" pdc-action="SAVE_SAMPLE_DESIGN" href="#"><?php echo __("Save") ?></a>
+    <?php endif; ?>
+
     <div id="pdc_controls">
         <div class="pdc-sides pdc-controls-group" pdc-data="side-list">
         </div>

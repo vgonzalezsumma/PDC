@@ -1284,8 +1284,8 @@ ul.nav-tabs > li a:hover, ul.nav-tabs > li.active a, ul.nav-tabs > li.active a:h
     display: inline-block;
     overflow: visible !important;
     position: absolute;
-    top: 20px;
-    right: 45px;
+    top: 90px;
+    right: 79px;
     width: 46px;
     text-align: center;
     z-index: 9;
@@ -1350,6 +1350,32 @@ ul.nav-tabs > li a:hover, ul.nav-tabs > li.active a, ul.nav-tabs > li.active a:h
 #pdc_controls .pdc-social .download-item {
     background: url(../images/icon-download.png) 50% 0 no-repeat;
     background-size: 20px auto;
+}
+
+#save-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all .3s;
+    background: #7418BE;
+    color: #FFF;
+    border: 2px solid #7418BE;
+    display: inline-block;
+    text-align: center;
+    height: 68px;
+    line-height: 64px;
+    width: 210px;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
+}
+#save-btn:hover {
+    background: rgba(255,255,255,0);
+    color: #7418BE;
+    text-decoration: none;
+}
+#save-btn[disabled] {
+    opacity: .15;
 }
 
 .pdc-product-image {
